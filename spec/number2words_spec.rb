@@ -50,4 +50,16 @@ describe("number2words") do
   it("takes a six digit number and returns the number in word form") do
     expect("999999".number2words()).to(eq("nine-hundred-ninety-nine-thousand-nine-hundred-ninetynine"))
   end
+  it("takes a seven digit number and returns the number in word form") do
+    expect("1000000".number2words()).to(eq("one-million"))
+  end
+  it("takes a seven digit number and returns the number in word form") do
+    expect("1234563".number2words()).to(eq("one-million-two-hundred-thirty-four-thousand-five-hundred-sixtythree"))
+  end
+  it("takes a seven digit number and returns the number in word form") do
+    expect("10000000".number2words()).to(eq("ten-million"))
+  end
+  it("takes a seven digit number and returns the number in word form") do
+    expect("13579860".number2words()).to(eq("thirteen-million-five-hundred-seventy-nine-thousand-eight-hundred-sixty"))
+  end
 end
