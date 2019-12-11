@@ -1,42 +1,4 @@
 
-# if number_length === 1
-#   final_number.push(place1.fetch(self))
-# end
-# if number_length === 2
-#   check = self.split("")
-#   if check[0] === "1"
-#     final_number.push(place_teen.fetch(self))
-#   else
-#     final_number.push(place2.fetch(check[0]))
-#   end
-# end
-# if number_length === 3
-#   hundreds = self.split("")
-#   first = hundreds[0]
-#   second = hundreds[1]
-#   third = hundreds[2]
-#   final_number.push(place1.fetch(first))
-#   final_number.push("-")
-#   final_number.push("hundred")
-#   if second === "1"
-#     final_number.push("-")
-#     teen = hundreds.slice(1,2).join()
-#     final_number.push(place_teen.fetch(teen))
-#   elsif second && third === "0"
-#     final_number.push
-#   else
-#     final_number.push("-")
-#     tens  = hundreds.slice(1,2)
-#     final_number.push(place2.fetch(tens[0]))
-#     if third != "0"
-#       final_number.push(place1.fetch(third))
-#     end
-#   end
-# end
-
-# if number_length === 4
-
-
 class String
 
   def number2words()
@@ -47,8 +9,7 @@ class String
 
     place2 = {"2" => "twenty", "3" => "thirty", "4" => "fourty", "5" => "fifty", "6" => "sixty", "7" => "seventy", "8" => "eighty", "9" => "ninety"}
 
-    place3 = {"0" => "hundred"}
-    place4 = {"0" => "thousand"}
+
     number_length = self.length
     backwards_number = self.reverse
 
@@ -59,7 +20,9 @@ class String
     fourth = number_backwards[3]
     fifth = number_backwards[4]
     sixth = number_backwards[5]
-
+    seventh = number_backwards[6]
+    eighth = number_backwards[7]
+    nineth = number_backwards[8]
 
     # caulculates ones place
     if first != "0" && second != "1"
@@ -74,7 +37,6 @@ class String
 
     # caulculates tens place
     if second === "1"
-      
       tens = number_backwards.slice(0,2).join().reverse()
       final_number.push(place_teen.fetch(tens))
       if third === nil
@@ -143,14 +105,8 @@ class String
     end
 
 
-
+    # Calculates 100 thounds place
     if sixth != "0"
-      puts first
-      puts second
-      puts third
-      puts fourth
-      puts fifth
-      puts sixth
       if first === "0" && second === "0" && third === "0" && fourth === "0" && fifth === "0"
       else
         final_number.unshift("-")
@@ -165,6 +121,63 @@ class String
         final_number.unshift("hundred")
         final_number.unshift("-")
         final_number.unshift(place1.fetch(sixth))
+      end
+      if seventh === nil
+        return final_number.join()
+      end
+    end
+
+    # Calculates millions place
+    if seventh != "0"
+      if first === "0" && second === "0" && third === "0" && fourth === "0" && fifth === "0" && sixth === "0"
+      else
+        final_number.unshift("-")
+      end
+      final_number.unshift("million")
+
+      final_number.unshift("-")
+
+      final_number.unshift(place1.fetch(seventh))
+      if eighth === nil
+        return final_number.join()
+      end
+    end
+
+    # Calculates ten millionth place
+    if eighth != "0"
+      puts first
+      puts second
+      puts third
+      puts fourth
+      puts fifth
+      puts sixth
+      puts seventh
+      puts eighth
+      puts nineth
+      if first === "0" && second === "0" && third === "0" && fourth === "0" && fifth === "0" && sixth === "0" && seventh === "0"
+      else
+        final_number.unshift("-")
+      end
+      if eighth === "1"
+        tens = number_backwards.slice(6,7).join().reverse()
+        puts tens
+        if seventh === "0"
+          final_number.unshift("million")
+          final_number.unshift("-")
+          final_number.unshift(place1.fetch(sixth))
+        else
+          final_number.unshift("million")
+          final_number.unshift("-")
+          final_number.unshift(place_teen.fetch(tens))
+        end
+        if nineth === nil
+          return final_number.join()
+        end
+      else
+        final_number.unshift(place2.fetch(nineth))
+        if nineth === nil
+          return final_number.join()
+        end
       end
     end
     final_number.join()
